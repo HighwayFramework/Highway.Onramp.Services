@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Highway.Onramp.Services</id>
+    <version>2.0.0-Alpha1</version>
+    <authors>Tim Rayburn and Devlin Liles</authors>
+    <owners>TRayburn</owners>
+    <licenseUrl>https://github.com/HighwayFramework/Highway.Onramp.Services/blob/master/README.markdown</licenseUrl>
+    <projectUrl>http://github.com/HighwayFramework/Highway.Onramp.Services</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Quickstart package for Highway Framework in an Services project.</description>
+    <copyright>Copyright 2013 Timothy J. Rayburn</copyright>
+    <tags>Highway Services architecture</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Configuration" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Castle.Windsor-NLog" />
+      <dependency id="Topshelf.NLog" />
+    </dependencies>
+  </metadata>
+</package>
