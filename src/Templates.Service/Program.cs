@@ -59,12 +59,21 @@ namespace Templates
         public class ContainerHostedService
         {
             private IHostedService hostedService;
+            private IStartServiceEvent[] startEvents = new IStartServiceEvent[] {};
+            private IStopServiceEvent[] stopEvents = new IStopServiceEvent[] {};
 
             public void Start()
             {
                 IoC.Container.Install(FromAssembly.This());
 
                 hostedService = IoC.Container.Resolve<IHostedService>();
+                startEvents = IoC.Container.ResolveAll<IStartServiceEvent>();
+                stopEvents = IoC.Container.ResolveAll<IStopServiceEvent>();
+
+                foreach (var startServiceEvent in startEvents.OrderBy(e => e.Order))
+                {
+                    startServiceEvent.Execute();
+                }
 
                 hostedService.Start();
             }
@@ -72,6 +81,11 @@ namespace Templates
             {
                 if (hostedService != null)
                     hostedService.Stop();
+
+                foreach (var stopServiceEvent in stopEvents.OrderBy(e => e.Order))
+                {
+                    stopServiceEvent.Execute();
+                }
 
                 using (IoC.Container) { }
                 IoC.Container = null;

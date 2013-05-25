@@ -1,4 +1,4 @@
-﻿// [[Highway.Onramp.Services]]
+﻿// [[Highway.Onramp.Services.Data]]
 // Copyright 2013 Timothy J. Rayburn
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,23 +12,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Castle.MicroKernel.Registration;
+using Castle.Core.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Templates.Abstractions;
-using Castle.MicroKernel.SubSystems.Configuration;
-using Castle.Windsor;
 
-namespace Templates.Service.Installers
+namespace Templates.Service.ServiceEvents
 {
-    public class ServiceInstaller : IWindsorInstaller
+    public class EnsureDatabaseIsReachable : IStartServiceEvent
     {
-        public void Install(IWindsorContainer container, IConfigurationStore store)
+        public EnsureDatabaseIsReachable()
         {
-            container.Register(Component.For<IHostedService>().ImplementedBy<Service>());
+            Logger = NullLogger.Instance;
+        }
+
+        public ILogger Logger { get; set; }
+
+        public int Order
+        {
+            get { return 10; }
+        }
+
+        public void Execute()
+        {
+            Logger.Info("Ensuring we can connect to a database");
         }
     }
 }

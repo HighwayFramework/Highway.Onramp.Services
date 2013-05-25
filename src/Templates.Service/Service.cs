@@ -19,13 +19,15 @@ namespace Templates.Service
             Logger = NullLogger.Instance;
 
             timer = new Timer(1000) { AutoReset = true };
-            timer.Elapsed += (sender, eventArgs) =>
-            {
-                Logger.Info("Tick Tock goes the clock");
-            };
+            timer.Elapsed += OnTimerFired;
         }
 
         private readonly Timer timer;
+
+        private void OnTimerFired(object sender, ElapsedEventArgs eventArgs)
+        {
+            Logger.Info("Tick Tock goes the clock");
+        }
 
         public void Start()
         {

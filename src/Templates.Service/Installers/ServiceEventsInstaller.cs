@@ -18,17 +18,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Templates.Abstractions;
-using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Templates.Abstractions;
 
 namespace Templates.Service.Installers
 {
-    public class ServiceInstaller : IWindsorInstaller
+    public class ServiceEventsInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IHostedService>().ImplementedBy<Service>());
+            container.Register(
+                Classes.FromThisAssembly().BasedOn<IStartServiceEvent>()
+                .WithServiceFromInterface(typeof(IStartServiceEvent)),
+                Classes.FromThisAssembly().BasedOn<IStartServiceEvent>()
+                .WithServiceFromInterface(typeof(IStartServiceEvent))
+            );
         }
     }
 }
