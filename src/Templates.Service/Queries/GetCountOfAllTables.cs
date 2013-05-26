@@ -1,4 +1,4 @@
-// [[Highway.Onramp.Services.Data]]
+﻿// [[Highway.Onramp.Services.Data]]
 // Copyright 2013 Timothy J. Rayburn
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,33 +12,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-using Castle.Core.Logging;
 using Highway.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
 
-namespace Templates.Abstractions
+namespace Templates.Service.Queries
 {
-    public interface IRepositoryFactory
+    public class GetCountOfAllTables : AdvancedScalar<int>
     {
-        IRepository CreateRepository();
-        void ReleaseRepository(IRepository repo);
-    }
-
-    public static class RepositoryFactoryExtensions
-    {
-        public static void With(this IRepositoryFactory factory, Action<IRepository> action)
+        public GetCountOfAllTables()
         {
-            var repo = factory.CreateRepository();
-            try
-            {
-                action.Invoke(repo);
-            }
-            finally
-            {
-                factory.ReleaseRepository(repo);
-            }
+            ContextQuery = c => c.ExecuteSqlQuery<int>("select count(*) from sys.tables").ToList().First();
         }
     }
 }

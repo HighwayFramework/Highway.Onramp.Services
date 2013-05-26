@@ -33,17 +33,17 @@ namespace Templates.Service.Installers
         {
             container.Register(
                 Component.For<IDataContext>().ImplementedBy<DataContext>()
-                    .DependsOn(Dependency.OnAppSettingsValue("connectionString", "HighwayData.ConnectionString"))
+                    .DependsOn(Dependency.OnAppSettingsValue("connectionString", "Highway.ConnectionString"))
                     .LifeStyle.Transient,
                 Component.For<IRepository>().ImplementedBy<Repository>()
                     .LifeStyle.Transient,
                 Component.For<IMappingConfiguration>().ImplementedBy<HighwayMappings>(),
                 Component.For<ILog>().UsingFactoryMethod((k, c) => LogManager.GetLogger("Highway")),
                 Component.For<IContextConfiguration>().ImplementedBy<HighwayContextConfiguration>(),
-                Component.For<IRepositoryFactory>().AsFactory(),
+                Component.For<IRepositoryFactory>().AsFactory().LifestyleTransient(),
                 Component.For<IDatabaseInitializer<DataContext>>()
                     .ImplementedBy<DropCreateDatabaseIfModelChanges<DataContext>>()
-                    .DependsOn(Dependency.OnAppSettingsValue("connectionString", "HighwayDataConnectionString"))
+                    .DependsOn(Dependency.OnAppSettingsValue("connectionString", "Highway.ConnectionString"))
                 );
 
             Database.SetInitializer(container.Resolve<IDatabaseInitializer<DataContext>>());

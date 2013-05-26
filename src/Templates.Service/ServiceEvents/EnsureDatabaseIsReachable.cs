@@ -19,13 +19,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Templates.Abstractions;
+using Templates.Service.Queries;
 
 namespace Templates.Service.ServiceEvents
 {
     public class EnsureDatabaseIsReachable : IStartServiceEvent
     {
-        public EnsureDatabaseIsReachable()
+        private readonly IRepositoryFactory repoFactory;
+
+        public EnsureDatabaseIsReachable(IRepositoryFactory repoFactory)
         {
+            this.repoFactory = repoFactory;
             Logger = NullLogger.Instance;
         }
 
@@ -39,6 +43,11 @@ namespace Templates.Service.ServiceEvents
         public void Execute()
         {
             Logger.Info("Ensuring we can connect to a database");
+            repoFactory.With(repo =>
+            {
+                var tableCount = repo.Find(new GetCountOfAllTables());
+                Logger.InfoFormat("Discovered {0} tables in the database.", tableCount);
+            });
         }
     }
 }
