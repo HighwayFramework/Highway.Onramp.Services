@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Highway.Onramp.Services</id>
-    <version>2.0.3.0</version>
+    <version>2.0.4.0</version>
     <authors>Tim Rayburn and Devlin Liles</authors>
     <owners>TRayburn</owners>
     <licenseUrl>https://github.com/HighwayFramework/Highway.Onramp.Services/blob/master/README.markdown</licenseUrl>
