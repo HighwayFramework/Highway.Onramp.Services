@@ -31,8 +31,8 @@ namespace Templates.Service.Installers
             container.Register(
                 Classes.FromThisAssembly().BasedOn<IStartServiceEvent>()
                 .WithServiceFromInterface(typeof(IStartServiceEvent)),
-                Classes.FromThisAssembly().BasedOn<IStartServiceEvent>()
-                .WithServiceFromInterface(typeof(IStartServiceEvent))
+                Classes.FromThisAssembly().BasedOn<IStopServiceEvent>()
+                .WithServiceFromInterface(typeof(IStopServiceEvent))
             );
         }
     }
