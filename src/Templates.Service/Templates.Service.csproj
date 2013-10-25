@@ -87,30 +87,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\IHostedService.cs" />
-    <Compile Include="Abstractions\IRepositoryFactory.cs" />
-    <Compile Include="Abstractions\IStartServiceEvent.cs" />
-    <Compile Include="Abstractions\IStopServiceEvent.cs" />
-    <Compile Include="Config\HighwayContextConfiguration.cs" />
-    <Compile Include="Config\HighwayMappings.cs" />
-    <Compile Include="Config\IServiceConfig.cs" />
+    <Compile Include="App_Architecture\Activators\WindsorActivator.cs" />
+    <Compile Include="App_Architecture\Configs\IConnectionStringConfig.cs" />
+    <Compile Include="App_Architecture\Installers\DefaultConventionInstaller.cs" />
+    <Compile Include="App_Architecture\PlugIns\Data\HighwayDataContext.cs" />
+    <Compile Include="App_Architecture\Services\IHostedService.cs" />
+    <Compile Include="App_Architecture\PlugIns\Data\IRepositoryFactory.cs" />
+    <Compile Include="App_Architecture\Services\IStartServiceEvent.cs" />
+    <Compile Include="App_Architecture\Services\IStopServiceEvent.cs" />
+    <Compile Include="App_Architecture\PlugIns\Data\HighwayMappings.cs" />
+    <Compile Include="App_Architecture\Configs\IServiceConfig.cs" />
     <Compile Include="Entities\ExampleEntity.cs" />
-    <Compile Include="Installers\CastleInstaller.cs" />
-    <Compile Include="Abstractions\IoC.cs" />
-    <Compile Include="Installers\ServiceEventsInstaller.cs" />
-    <Compile Include="Installers\HighwayInstaller.cs" />
-    <Compile Include="Installers\ServiceInstaller.cs" />
+    <Compile Include="App_Architecture\IoC.cs" />
+    <Compile Include="App_Architecture\Installers\ServiceEventsInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\HighwayInstaller.cs" />
+    <Compile Include="App_Architecture\Installers\ServiceInstaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GetCountOfAllTables.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="ServiceEvents\EnsureDatabaseIsReachable.cs" />
+    <Compile Include="HostedService.cs" />
+    <Compile Include="App_Architecture\ServiceEvents\EnsureDatabaseIsReachableStartServiceEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Architecture\BaseTypes\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Templates.Service.Entities
+namespace Templates.Entities
 {
     public class ExampleEntity
     {
